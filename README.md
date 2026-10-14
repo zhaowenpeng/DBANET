@@ -51,10 +51,10 @@ pip install -r requirements.txt
 
 The following checkpoints initialize the two backbones; they are **not trained DBANet checkpoints**.
 
-| Backbone | File in `weights/` | Size | Upstream source |
-|---|---|---:|---|
-| DINOv3 ViT-L/16, SAT-493M | `dinov3_vitl16_sat493m.safetensors` | 1.21 GB | [timm DINOv3 model card](https://huggingface.co/timm/vit_large_patch16_dinov3.sat493m) · [Download](https://huggingface.co/timm/vit_large_patch16_dinov3.sat493m/resolve/main/model.safetensors) |
-| RWKV-UNet-B encoder | `net_B.pth` | 97.02 MB | [RWKV-UNet](https://github.com/juntaoJianggavin/RWKV-UNet) · [Checkpoint mirror](https://huggingface.co/FengheTan9/U-Stone/resolve/main/net_B.pth) |
+| Backbone                  | File in `weights/`                  |     Size | Upstream source                                                                                                                                                                                 |
+| ------------------------- | ------------------------------------- | -------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DINOv3 ViT-L/16, SAT-493M | `dinov3_vitl16_sat493m.safetensors` |  1.21 GB | [timm DINOv3 model card](https://huggingface.co/timm/vit_large_patch16_dinov3.sat493m) · [Download](https://huggingface.co/timm/vit_large_patch16_dinov3.sat493m/resolve/main/model.safetensors) |
+| RWKV-UNet-B encoder       | `net_B.pth`                         | 97.02 MB | [RWKV-UNet](https://github.com/juntaoJianggavin/RWKV-UNet) · [Checkpoint mirror](https://huggingface.co/FengheTan9/U-Stone/resolve/main/net_B.pth)                                               |
 
 Sizes use decimal units. The DINOv3 file is the timm-compatible conversion of the satellite-pretrained Meta checkpoint, renamed locally. Original Meta-format `.pth` files cannot be substituted directly. DINOv3 weights are distributed under the included [DINOv3 license](weights/DINOV3_LICENSE.md); the RWKV checkpoint mirror declares [Apache 2.0](weights/RWKV_WEIGHTS_LICENSE.txt). The adapted RWKV and KAN source components retain their respective license notices.
 
@@ -88,6 +88,11 @@ These commands use synthetic inputs to check execution; pretrained backbone init
 
 ## Checkpoint Loading
 
+Download the backbone initialization weights and place them in `weights/`:
+
+- [DINOv3 ViT-L/16 SAT-493M weights](https://huggingface.co/timm/vit_large_patch16_dinov3.sat493m/resolve/main/model.safetensors): save as `weights/dinov3_vitl16_sat493m.safetensors`.
+- [RWKV-UNet-B weights](https://huggingface.co/FengheTan9/U-Stone/resolve/main/net_B.pth): save as `weights/net_B.pth`.
+
 For a trained DBANet checkpoint, use:
 
 ```bash
@@ -100,15 +105,15 @@ Checkpoints are loaded strictly. Direct state dictionaries and dictionaries cont
 
 The five agricultural datasets support parcel delineation and transfer evaluations. WHU and MASS are used for cross-task applicability experiments with supervised training on building labels.
 
-| Dataset used in the manuscript | Original dataset or download page | Reference |
-|---|---|---|
-| AI4Orthos (AI4Boundaries orthophotos) | [JRC Open Data Catalogue](https://data.europa.eu/89h/0e79ce5d-e4c8-4721-8773-59a4acf2c9c9) | d'Andrimont et al. (2023) [1] |
-| FGFD (Fine-Grained Farmland Dataset) | [Official dataset links](https://github.com/Henryjiepanli/DBBANet) | Li et al. (2025) [2] |
-| CCPTD (China's Crop Parcel Training Dataset) | [Zenodo](https://zenodo.org/records/16595511) | Lu et al. (2025) [3] |
-| AI4Small (AI4SmallFarms) | [DANS dataset](https://doi.org/10.17026/dans-xy6-ngg6) | Persello et al. (2023) [4] |
-| GTPBD (Global Terraced Parcel and Boundary Dataset) | [Dataset download](https://huggingface.co/datasets/wxqzzw/GTD) · [Official repository](https://github.com/Z-ZW-WXQ/GTPBD) | Zhang et al. (2025) [5] |
-| WHU Building Dataset (aerial imagery) | [Official dataset page](https://study.rsgis.whu.edu.cn/pages/download/building_dataset.html) | Ji et al. (2019) [6] |
-| MASS (Massachusetts Buildings Dataset) | [Original images and labels](https://www.cs.utoronto.ca/~vmnih/data/) | Mnih (2013) [7] |
+| Dataset used in the manuscript                      | Original dataset or download page                                                                                        | Reference                     |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| AI4Orthos (AI4Boundaries orthophotos)               | [JRC Open Data Catalogue](https://data.europa.eu/89h/0e79ce5d-e4c8-4721-8773-59a4acf2c9c9)                                | d'Andrimont et al. (2023) [1] |
+| FGFD (Fine-Grained Farmland Dataset)                | [Official dataset links](https://github.com/Henryjiepanli/DBBANet)                                                        | Li et al. (2025) [2]          |
+| CCPTD (China's Crop Parcel Training Dataset)        | [Zenodo](https://zenodo.org/records/16595511)                                                                             | Lu et al. (2025) [3]          |
+| AI4Small (AI4SmallFarms)                            | [DANS dataset](https://doi.org/10.17026/dans-xy6-ngg6)                                                                    | Persello et al. (2023) [4]    |
+| GTPBD (Global Terraced Parcel and Boundary Dataset) | [Dataset download](https://huggingface.co/datasets/wxqzzw/GTD) · [Official repository](https://github.com/Z-ZW-WXQ/GTPBD) | Zhang et al. (2025) [5]       |
+| WHU Building Dataset (aerial imagery)               | [Official dataset page](https://study.rsgis.whu.edu.cn/pages/download/building_dataset.html)                              | Ji et al. (2019) [6]          |
+| MASS (Massachusetts Buildings Dataset)              | [Original images and labels](https://www.cs.utoronto.ca/~vmnih/data/)                                                     | Mnih (2013) [7]               |
 
 The links point to the original datasets. Dataset subsets, preprocessing, and evaluation splits follow the manuscript; processed copies are not included in this release. Please cite the original dataset publications when using the data.
 

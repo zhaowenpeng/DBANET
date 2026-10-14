@@ -1,0 +1,2 @@
+weights/*.safetensors filter=lfs diff=lfs merge=lfs -text
+weights/*.pth filter=lfs diff=lfs merge=lfs -text
